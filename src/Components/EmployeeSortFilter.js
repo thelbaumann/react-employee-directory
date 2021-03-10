@@ -2,14 +2,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EmployeeCard from './EmployeeCard';
+import ViewListIcon from '@material-ui/icons/ViewList';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
-function EmployeeWrapper() {
+function EmployeeSortFilter() {
 
     const [EmployeeState, setEmployeeState] = useState([]);
 
     useEffect(() => {
         getRandomUserData()
     }, []);
+
+    const [view, setView] = useState('card');
+
+    const handleViewChange = (event, nextView) => {
+        setView(nextView);
+      };
 
     async function getRandomUserData() {
         console.log("we are getting data now!")
@@ -88,12 +98,21 @@ function EmployeeWrapper() {
                 </select>
             </form>
 
+            <ToggleButtonGroup value={view} exclusive onChange={handleViewChange}>
+                <ToggleButton value="table" aria-label="table">
+                    <ViewListIcon />
+                </ToggleButton>
+                <ToggleButton value="card" aria-label="car">
+                    <ViewModuleIcon />
+                </ToggleButton>
+            </ToggleButtonGroup>
+
             <EmployeeCard
                 jsonData={EmployeeState}
-                sort={handleSort}
+                view={view}
             />
         </div>
     )
 }
 
-export default EmployeeWrapper;
+export default EmployeeSortFilter;

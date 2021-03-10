@@ -1,11 +1,11 @@
 import React from 'react';
-import EmployeeWrapper from './Components/EmployeeWrapper';
+import EmployeeSortFilter from './Components/EmployeeSortFilter';
 // import Header from './';
 
 function App() {
   return (
     <div>
-      <EmployeeWrapper />
+      <EmployeeSortFilter />
     </div>
   );
 }
