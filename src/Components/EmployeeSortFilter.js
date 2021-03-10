@@ -114,16 +114,17 @@ function EmployeeSortFilter() {
         <div>
 
             <form>
-                <label for="sort">Sort the Grid:</label>
-                <select id="sort" name="sort" onChange={(val) => handleSort(val.target.value)}>
-                    <option value="default">Default Sort</option>
-                    <option value="firstAZ">First Name A-Z</option>
-                    <option value="firstZA">First Name Z-A</option>
-                    <option value="lastAZ">Last Name A-Z</option>
-                    <option value="lastZA">Last Name Z-A</option>
-                </select>
+                <div className="Inputs">
+                    <select id="sort" name="sort" onChange={(val) => handleSort(val.target.value)}>
+                        <option value="default">Default Sort</option>
+                        <option value="firstAZ">First Name A-Z</option>
+                        <option value="firstZA">First Name Z-A</option>
+                        <option value="lastAZ">Last Name A-Z</option>
+                        <option value="lastZA">Last Name Z-A</option>
+                    </select>
+                </div>
 
-                <label for="filter">Filter the Grid:</label>
+                <div className="Inputs">
 
                     <input type="radio" id="female" name="gender" value="female"
                     onChange={handleFilter}></input>
@@ -139,17 +140,22 @@ function EmployeeSortFilter() {
                     onChange={handleFilter}></input>
 
                     <label for="other">All</label>
-                    
-                </form>
+                </div>
 
-            <ToggleButtonGroup value={view} exclusive onChange={handleViewChange}>
-                <ToggleButton value="table" aria-label="table">
-                    <ViewListIcon />
-                </ToggleButton>
-                <ToggleButton value="card" aria-label="car">
-                    <ViewModuleIcon />
-                </ToggleButton>
-            </ToggleButtonGroup>
+                <div className="Inputs">
+                    
+                    <ToggleButtonGroup value={view} exclusive onChange={handleViewChange} size="small">
+                        <ToggleButton value="table" aria-label="table">
+                            <ViewListIcon />
+                        </ToggleButton>
+                        <ToggleButton value="card" aria-label="car">
+                            <ViewModuleIcon />
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+
+                </div>
+
+            </form>
 
             <EmployeeCard
                 jsonData={EmployeeState}
