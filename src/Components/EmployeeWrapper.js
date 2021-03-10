@@ -19,12 +19,12 @@ function EmployeeWrapper() {
         setEmployeeState(res.data.results);
     }
 
-    const sort = (option) => {
+    const handleSort = (option) => {
         console.log("sorting is happening");
 
-        if (option === 0) {
+        if (option === "default") {
             getRandomUserData();
-        } else if (option === 1) {
+        } else if (option === "firstAZ") {
             const sorting = EmployeeState.sort((person1, person2) => {
                 if (person1.name.first < person2.name.first) { 
                     return -1; 
@@ -35,7 +35,7 @@ function EmployeeWrapper() {
                 }
             });
             setEmployeeState([...sorting]);
-        } else if (option === 2) {
+        } else if (option === "firstZA") {
             const sorting = EmployeeState.sort((person1, person2) => {
                 if (person1.name.first > person2.name.first) { 
                     return -1; 
@@ -46,7 +46,7 @@ function EmployeeWrapper() {
                 }
             });
             setEmployeeState([...sorting]);
-        } else if (option === 3) {
+        } else if (option === "lastAZ") {
             const sorting = EmployeeState.sort((person1, person2) => {
                 if (person1.name.last < person2.name.last) { 
                     return -1; 
@@ -57,7 +57,7 @@ function EmployeeWrapper() {
                 }
             });
             setEmployeeState([...sorting]);
-        } else if (option === 4) {
+        } else if (option === "lastZA") {
             const sorting = EmployeeState.sort((person1, person2) => {
                 if (person1.name.last > person2.name.last) { 
                     return -1; 
@@ -79,7 +79,7 @@ function EmployeeWrapper() {
         <div>
 
             <form>
-                <select id="sort" name="sort">
+                <select id="sort" name="sort" onChange={(val) => handleSort(val.target.value)}>
                     <option value="default">Default Sort</option>
                     <option value="firstAZ">First Name A-Z</option>
                     <option value="firstZA">First Name Z-A</option>
@@ -90,7 +90,7 @@ function EmployeeWrapper() {
 
             <EmployeeCard
                 jsonData={EmployeeState}
-                sort={sort}
+                sort={handleSort}
             />
         </div>
     )
