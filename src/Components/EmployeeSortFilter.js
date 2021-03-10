@@ -84,11 +84,37 @@ function EmployeeSortFilter() {
         
     }
 
+    async function handleFilter() {
+        console.log("filtering is happening");
+
+        const res = await axios.get("https://randomuser.me/api/?results=9&seed=seed");
+
+        if (document.getElementById("female").checked) {
+            let filtering = res.data.results.filter((employee) => {
+                return employee.gender === "female";
+            });
+            setEmployeeState([...filtering]);
+            console.log([[...filtering]]);
+
+        } else if (document.getElementById("male").checked) {
+            let filtering = res.data.results.filter((employee) => {
+                return employee.gender === "male";
+            });
+            setEmployeeState([...filtering]);
+            console.log([[...filtering]]);
+
+        } else {
+            getRandomUserData();
+        }
+        
+    }
+
     return (
 
         <div>
 
             <form>
+                <label for="sort">Sort the Grid:</label>
                 <select id="sort" name="sort" onChange={(val) => handleSort(val.target.value)}>
                     <option value="default">Default Sort</option>
                     <option value="firstAZ">First Name A-Z</option>
@@ -96,7 +122,25 @@ function EmployeeSortFilter() {
                     <option value="lastAZ">Last Name A-Z</option>
                     <option value="lastZA">Last Name Z-A</option>
                 </select>
-            </form>
+
+                <label for="filter">Filter the Grid:</label>
+
+                    <input type="radio" id="female" name="gender" value="female"
+                    onChange={handleFilter}></input>
+
+                    <label for="female">Women Only</label>
+
+                    <input type="radio" id="male" name="gender" value="male"
+                    onChange={handleFilter}></input>
+
+                    <label for="other">Men Only</label>
+
+                    <input type="radio" id="all" name="gender" value="all"
+                    onChange={handleFilter}></input>
+
+                    <label for="other">All</label>
+                    
+                </form>
 
             <ToggleButtonGroup value={view} exclusive onChange={handleViewChange}>
                 <ToggleButton value="table" aria-label="table">

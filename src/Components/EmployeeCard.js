@@ -12,11 +12,11 @@ function EmployeeCard(props) {
 
               <img alt={employee.name.first + employee.name.last} src={employee.picture.large} />
 
-              <div class="tableNameWrap">
+              <div className="tableNameWrap">
                 <h2>{employee.name.first + " " + employee.name.last}</h2>
               </div>
 
-              <div class="tableUlWrap">
+              <div className="tableUlWrap">
                   <ul>
                     <li>
                       {employee.location.city + " [" + employee.location.timezone.offset + "]"}
